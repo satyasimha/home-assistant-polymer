@@ -95,17 +95,17 @@
     </style>
 
     <app-toolbar>
-      <div main-title>Home Assistant</div>
+      <div main-title>Sphynx Home Automation</div>
       <paper-icon-button icon='mdi:chevron-left' hidden$='[[narrow]]' on-tap='toggleMenu'></paper-icon-button>
     </app-toolbar>
 
     <paper-menu attr-for-selected='data-panel' selected='[[hass.currentPanel]]' on-iron-select='menuSelect'>
       <paper-icon-item on-tap='menuClicked' data-panel='states'>
         <iron-icon item-icon icon='mdi:apps'></iron-icon>
-        <span class='item-text'>States</span>
+        <span class='item-text'>Components, Entities & States</span>
       </paper-icon-item>
 
-      <template is='dom-repeat' items='[[panels]]'>
+      <template is='dom-if' items='[[panels]]' if='[[theseAreSupported]]'>
         <paper-icon-item on-tap='menuClicked' data-panel$='[[item.url_path]]'>
           <iron-icon item-icon icon='[[item.icon]]'></iron-icon>
           <span class='item-text'>[[item.title]]</span>
@@ -114,7 +114,7 @@
 
       <paper-icon-item on-tap='menuClicked' data-panel='logout' class='logout'>
         <iron-icon item-icon icon='mdi:exit-to-app'></iron-icon>
-        <span class='item-text'>Log Out</span>
+        <span class='item-text'>Log Out to Home Screen</span>
       </paper-icon-item>
     </paper-menu>
 
@@ -133,25 +133,19 @@
 
       <div class='divider'></div>
 
-      <div class='subheader'>Developer Tools</div>
+      <div class='subheader'>Activity Log</div>
 
       <div class='dev-tools layout horizontal justified'>
         <paper-icon-button
-          icon='mdi:remote' data-panel='dev-service'
-          alt="Services" title="Services"
+          icon='mdi:library' data-panel='logbook'
+          alt="LogBook" title="Logs"
           on-tap='menuClicked'></paper-icon-button>
-        <paper-icon-button
-          icon='mdi:code-tags' data-panel='dev-state'
-          alt="States" title="States"
-          on-tap='menuClicked'></paper-icon-button>
-        <paper-icon-button
-          icon='mdi:radio-tower' data-panel='dev-event'
-          alt="Events" title="Events"
-          on-tap='menuClicked'></paper-icon-button>
-        <paper-icon-button
-          icon='mdi:file-xml' data-panel='dev-template'
-          alt="Templates" title="Templates"
-          on-tap='menuClicked'></paper-icon-button>
+      </div>
+      <div class='divider'></div>
+
+      <div class='subheader'>About SPHYNXbian</div>
+
+      <div class='dev-tools layout horizontal justified'>
         <paper-icon-button
           icon='mdi:information-outline' data-panel='dev-info'
           alt="Info" title="Info"
